@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Assets Management System{% endblock %}
+
+{% block styles %}
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.user-info {
+    color: #666;
+    font-size: 14px;
+}
+
+.logout-btn {
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.logout-btn:hover {
+    transform: translateY(-2px);
+}
+
+.assets-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.assets-table th {
+    background-color: #f8f9fa;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.assets-table td {
+    padding: 12px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.assets-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-available {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-inuse {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.container {
+    max-width: 800px;
+}
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <div>
+        <h1>Assets Management System</h1>
+        <p class="user-info">Logged in as: <strong>{{ username }}</strong></p>
+    </div>
+    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+</div>
+
+<h2>Asset Inventory</h2>
+
+<table class="assets-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Asset Name</th>
+            <th>Category</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for asset in assets %}
+        <tr>
+            <td>{{ asset.id }}</td>
+            <td>{{ asset.name }}</td>
+            <td>{{ asset.category }}</td>
+            <td>
+                <span class="status-badge status-{{ asset.status.lower().replace(' ', '') }}">
+                    {{ asset.status }}
+                </span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
