@@ -1,0 +1,33 @@
+# Asset Management System - Apache Configuration
+
+# Prevent directory browsing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "^(config|database|session|functions)\.php$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Enable error pages
+ErrorDocument 403 /assets-management-system/unauthorized.php
+ErrorDocument 404 /assets-management-system/index.php
+
+# Protect SQL files
+<FilesMatch "\.sql$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Enable PHP error logging (disable display_errors in production)
+php_flag display_errors Off
+php_flag log_errors On
+
+# Set default charset
+AddDefaultCharset UTF-8
+
+# Enable rewrite engine (if needed for clean URLs in future)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /assets-management-system/
+</IfModule>
