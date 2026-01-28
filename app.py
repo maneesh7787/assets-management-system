@@ -1,14 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from functools import wraps
+from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
-# Correct login credentials
+# Configure session security
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+
+# Correct login credentials with hashed passwords
+# Plain text: admin/admin123, user/user123
 USERS = {
-    'admin': 'admin123',
-    'user': 'user123'
+    'admin': generate_password_hash('admin123'),
+    'user': generate_password_hash('user123')
 }
 
 # Sample assets database
@@ -36,10 +42,15 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '')
         
-        if username in USERS and USERS[username] == password:
+        # Validate input
+        if not username or not password:
+            flash('Username and password are required.', 'danger')
+            return render_template('login.html')
+        
+        if username in USERS and check_password_hash(USERS[username], password):
             session['username'] = username
             flash(f'Welcome {username}!', 'success')
             return redirect(url_for('dashboard'))
@@ -60,4 +71,7 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Only allow debug mode and 0.0.0.0 binding in development
+    debug_mode = os.environ.get('FLASK_ENV') == 'development'
+    host = os.environ.get('FLASK_HOST', '127.0.0.1')
+    app.run(debug=debug_mode, host=host, port=5000)
