@@ -9,8 +9,8 @@ A comprehensive PHP-based system for managing employees and company assets.
 - **Asset Assignment**: Track which assets are assigned to which employees with full assignment history
 - **Three Main Pages** (as requested):
   1. `admin/employee_details.php?id=1` - View detailed employee information
-  2. `edit_employee.php?id=1` - Edit employee details
-  3. `asset_details.php?id=1` - View detailed asset information
+  2. `admin/edit_employee.php?id=1` - Edit employee details
+  3. `admin/asset_details.php?id=1` - View detailed asset information
 
 ## Database Schema
 
@@ -60,7 +60,9 @@ http://localhost/index.php
 ```
 assets-management-system/
 ├── admin/
-│   └── employee_details.php    # View employee details (with ID parameter)
+│   ├── employee_details.php    # View employee details (with ID parameter)
+│   ├── edit_employee.php       # Edit employee (with ID parameter)
+│   └── asset_details.php       # View asset details (with ID parameter)
 ├── config/
 │   └── db.php                  # Database configuration
 ├── database/
@@ -68,8 +70,6 @@ assets-management-system/
 ├── includes/
 │   ├── header.php              # Common header template
 │   └── footer.php              # Common footer template
-├── asset_details.php           # View asset details (with ID parameter)
-├── edit_employee.php           # Edit employee (with ID parameter)
 └── index.php                   # Home page with dashboard
 ```
 
@@ -82,13 +82,13 @@ Navigate to: `admin/employee_details.php?id=1`
 - Provides link to edit employee
 
 ### Edit Employee
-Navigate to: `edit_employee.php?id=1`
+Navigate to: `admin/edit_employee.php?id=1`
 - Form to update employee information
 - All fields are pre-filled with current data
 - Updates database on form submission
 
 ### View Asset Details
-Navigate to: `asset_details.php?id=1`
+Navigate to: `admin/asset_details.php?id=1`
 - Displays complete asset information
 - Shows current assignment (if any)
 - Displays full assignment history
