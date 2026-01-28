@@ -10,7 +10,8 @@ function getDBConnection() {
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        error_log("Database connection failed: " . $conn->connect_error);
+        die("Database connection failed. Please contact the system administrator.");
     }
     
     return $conn;

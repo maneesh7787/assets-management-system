@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate required fields
     if (empty($first_name) || empty($last_name) || empty($email)) {
         $error_message = "First name, last name, and email are required fields.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error_message = "Invalid email format.";
     } else {
         $conn = getDBConnection();
         
@@ -42,9 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("ssssssssi", $first_name, $last_name, $email, $phone, $department, $position, $join_date, $status, $employee_id);
         
         if ($stmt->execute()) {
-            $success_message = "Employee information updated successfully!";
+            if ($stmt->affected_rows > 0) {
+                $success_message = "Employee information updated successfully!";
+            } else {
+                $error_message = "No changes were made or employee not found.";
+            }
         } else {
-            $error_message = "Error updating employee: " . $conn->error;
+            error_log("Error updating employee: " . $conn->error);
+            $error_message = "Error updating employee. Please try again.";
         }
         
         $stmt->close();
@@ -59,7 +66,7 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $employee_id);
 $stmt->execute();
 $result = $stmt->get_result();
-$employee = $result->fetch_assoc();
+$employee = $result->num_rows > 0 ? $result->fetch_assoc() : null;
 
 include 'includes/header.php';
 ?>
@@ -68,11 +75,11 @@ include 'includes/header.php';
     <h2>Edit Employee</h2>
     
     <?php if ($success_message): ?>
-        <div class="alert alert-success"><?php echo $success_message; ?></div>
+        <div class="alert alert-success"><?php echo htmlspecialchars($success_message); ?></div>
     <?php endif; ?>
     
     <?php if ($error_message): ?>
-        <div class="alert alert-error"><?php echo $error_message; ?></div>
+        <div class="alert alert-error"><?php echo htmlspecialchars($error_message); ?></div>
     <?php endif; ?>
     
     <?php if ($employee): ?>
@@ -130,14 +137,14 @@ include 'includes/header.php';
         </form>
     <?php else: ?>
         <div class="alert alert-error">
-            <strong>Error:</strong> Employee with ID <?php echo $employee_id; ?> not found.
+            <strong>Error:</strong> Employee with ID <?php echo htmlspecialchars($employee_id); ?> not found.
         </div>
         <a href="admin/employee_list.php" class="btn">Back to List</a>
     <?php endif; ?>
 </div>
 
 <?php
-$stmt->close();
-$conn->close();
+if (isset($stmt)) $stmt->close();
+if (isset($conn)) $conn->close();
 include 'includes/footer.php';
 ?>

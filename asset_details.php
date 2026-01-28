@@ -171,16 +171,16 @@ include 'includes/header.php';
 
     <?php else: ?>
         <div class="alert alert-error">
-            <strong>Error:</strong> Asset with ID <?php echo $asset_id; ?> not found.
+            <strong>Error:</strong> Asset with ID <?php echo htmlspecialchars($asset_id); ?> not found.
         </div>
         <a href="asset_list.php" class="btn">Back to List</a>
     <?php endif; ?>
 </div>
 
 <?php
-$stmt->close();
-$assignment_stmt->close();
-$history_stmt->close();
-$conn->close();
+if (isset($stmt)) $stmt->close();
+if (isset($assignment_stmt)) $assignment_stmt->close();
+if (isset($history_stmt)) $history_stmt->close();
+if (isset($conn)) $conn->close();
 include 'includes/footer.php';
 ?>

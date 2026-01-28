@@ -68,7 +68,7 @@ include 'includes/header.php';
         </div>
         
         <div style="background: #fff3e0; padding: 20px; border-radius: 5px; text-align: center;">
-            <h2 style="color: #f57c00; margin: 0;"><?php echo $asset_count - $assigned_count; ?></h2>
+            <h2 style="color: #f57c00; margin: 0;"><?php echo max(0, $asset_count - $assigned_count); ?></h2>
             <p style="margin: 5px 0 0 0;">Available Assets</p>
         </div>
     </div>

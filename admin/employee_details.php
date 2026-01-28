@@ -109,15 +109,15 @@ include '../includes/header.php';
 
     <?php else: ?>
         <div class="alert alert-error">
-            <strong>Error:</strong> Employee with ID <?php echo $employee_id; ?> not found.
+            <strong>Error:</strong> Employee with ID <?php echo htmlspecialchars($employee_id); ?> not found.
         </div>
         <a href="employee_list.php" class="btn">Back to List</a>
     <?php endif; ?>
 </div>
 
 <?php
-$stmt->close();
-$assets_stmt->close();
-$conn->close();
+if (isset($stmt)) $stmt->close();
+if (isset($assets_stmt)) $assets_stmt->close();
+if (isset($conn)) $conn->close();
 include '../includes/footer.php';
 ?>
