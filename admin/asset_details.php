@@ -98,8 +98,8 @@ include '../includes/header.php';
             </table>
             
             <div style="margin-top: 20px;">
-                <a href="edit_asset.php?id=<?php echo $asset['id']; ?>" class="btn btn-primary">Edit Asset</a>
-                <a href="asset_list.php" class="btn">Back to List</a>
+                <a href="../edit_asset.php?id=<?php echo $asset['id']; ?>" class="btn btn-primary">Edit Asset</a>
+                <a href="../asset_list.php" class="btn">Back to List</a>
             </div>
         </div>
 
@@ -173,7 +173,7 @@ include '../includes/header.php';
         <div class="alert alert-error">
             <strong>Error:</strong> Asset with ID <?php echo htmlspecialchars($asset_id); ?> not found.
         </div>
-        <a href="asset_list.php" class="btn">Back to List</a>
+        <a href="../asset_list.php" class="btn">Back to List</a>
     <?php endif; ?>
 </div>
 

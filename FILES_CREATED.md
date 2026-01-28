@@ -1,6 +1,6 @@
 # Files Created - Summary
 
-This document summarizes the files created to address the issue: "There are some files missing or haven't created yet"
+This document summarizes the files created to address the issue: "There are some files missing or haven't been created yet"
 
 ## Three Required Files (as per issue):
 
