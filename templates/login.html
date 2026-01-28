@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Assets Management System{% endblock %}
+
+{% block styles %}
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.credentials-info {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    font-size: 13px;
+    color: #666;
+}
+
+.credentials-info h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.credentials-info ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.credentials-info li {
+    margin-bottom: 5px;
+}
+
+.credentials-info code {
+    background-color: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+}
+{% endblock %}
+
+{% block content %}
+<h1>Assets Management System</h1>
+<h2>Login</h2>
+
+<form method="POST" action="{{ url_for('login') }}">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required autofocus>
+    </div>
+    
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    
+    <button type="submit">Login</button>
+</form>
+
+<div class="credentials-info">
+    <h3>Test Credentials:</h3>
+    <ul>
+        <li>Username: <code>admin</code> | Password: <code>admin123</code></li>
+        <li>Username: <code>user</code> | Password: <code>user123</code></li>
+    </ul>
+</div>
+{% endblock %}
