@@ -1,5 +1,5 @@
 <?php
-require_once 'config/db.php';
+require_once '../config/db.php';
 
 $page_title = "Asset Details";
 
@@ -38,7 +38,7 @@ $history_stmt->bind_param("i", $asset_id);
 $history_stmt->execute();
 $history_result = $history_stmt->get_result();
 
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 <div class="card">
@@ -110,7 +110,7 @@ include 'includes/header.php';
                     <tr>
                         <th style="background: #f4f4f4; color: #333; width: 200px;">Assigned To:</th>
                         <td>
-                            <a href="admin/employee_details.php?id=<?php echo $assignment['employee_id']; ?>">
+                            <a href="employee_details.php?id=<?php echo $assignment['employee_id']; ?>">
                                 <?php echo htmlspecialchars($assignment['first_name'] . ' ' . $assignment['last_name']); ?>
                             </a>
                         </td>
@@ -152,7 +152,7 @@ include 'includes/header.php';
                         <?php while ($history = $history_result->fetch_assoc()): ?>
                             <tr>
                                 <td>
-                                    <a href="admin/employee_details.php?id=<?php echo $history['employee_id']; ?>">
+                                    <a href="employee_details.php?id=<?php echo $history['employee_id']; ?>">
                                         <?php echo htmlspecialchars($history['first_name'] . ' ' . $history['last_name']); ?>
                                     </a>
                                 </td>
@@ -182,5 +182,5 @@ if (isset($stmt)) $stmt->close();
 if (isset($assignment_stmt)) $assignment_stmt->close();
 if (isset($history_stmt)) $history_stmt->close();
 if (isset($conn)) $conn->close();
-include 'includes/footer.php';
+include '../includes/footer.php';
 ?>

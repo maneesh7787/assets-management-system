@@ -1,5 +1,5 @@
 <?php
-require_once 'config/db.php';
+require_once '../config/db.php';
 
 $page_title = "Edit Employee";
 
@@ -68,7 +68,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $employee = $result->num_rows > 0 ? $result->fetch_assoc() : null;
 
-include 'includes/header.php';
+include '../includes/header.php';
 ?>
 
 <div class="card">
@@ -131,20 +131,20 @@ include 'includes/header.php';
             
             <div style="margin-top: 20px;">
                 <button type="submit" class="btn btn-success">Update Employee</button>
-                <a href="admin/employee_details.php?id=<?php echo $employee_id; ?>" class="btn">Cancel</a>
-                <a href="admin/employee_list.php" class="btn">Back to List</a>
+                <a href="employee_details.php?id=<?php echo $employee_id; ?>" class="btn">Cancel</a>
+                <a href="employee_list.php" class="btn">Back to List</a>
             </div>
         </form>
     <?php else: ?>
         <div class="alert alert-error">
             <strong>Error:</strong> Employee with ID <?php echo htmlspecialchars($employee_id); ?> not found.
         </div>
-        <a href="admin/employee_list.php" class="btn">Back to List</a>
+        <a href="employee_list.php" class="btn">Back to List</a>
     <?php endif; ?>
 </div>
 
 <?php
 if (isset($stmt)) $stmt->close();
 if (isset($conn)) $conn->close();
-include 'includes/footer.php';
+include '../includes/footer.php';
 ?>
