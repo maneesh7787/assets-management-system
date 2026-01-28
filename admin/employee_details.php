@@ -68,7 +68,7 @@ include '../includes/header.php';
             </table>
             
             <div style="margin-top: 20px;">
-                <a href="../edit_employee.php?id=<?php echo $employee['id']; ?>" class="btn btn-primary">Edit Employee</a>
+                <a href="edit_employee.php?id=<?php echo $employee['id']; ?>" class="btn btn-primary">Edit Employee</a>
                 <a href="employee_list.php" class="btn">Back to List</a>
             </div>
         </div>
@@ -96,7 +96,7 @@ include '../includes/header.php';
                                 <td><?php echo htmlspecialchars($asset['serial_number'] ?? 'N/A'); ?></td>
                                 <td><?php echo htmlspecialchars($asset['status'] ?? 'N/A'); ?></td>
                                 <td>
-                                    <a href="../asset_details.php?id=<?php echo $asset['id']; ?>" class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;">View</a>
+                                    <a href="asset_details.php?id=<?php echo $asset['id']; ?>" class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;">View</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
