@@ -16,8 +16,8 @@ This document summarizes the files created to address the issue: "There are some
 
 **URL Example**: `admin/employee_details.php?id=1`
 
-### 2. edit_employee.php?id=1
-**Location**: `/edit_employee.php`
+### 2. admin/edit_employee.php?id=1
+**Location**: `/admin/edit_employee.php`
 **Purpose**: Edit and update employee information
 **Features**:
 - Pre-fills form with current employee data
@@ -27,10 +27,10 @@ This document summarizes the files created to address the issue: "There are some
 - Provides navigation back to employee details or list
 - Supports editing all employee fields including status
 
-**URL Example**: `edit_employee.php?id=1`
+**URL Example**: `admin/edit_employee.php?id=1`
 
-### 3. asset_details.php?id=1
-**Location**: `/asset_details.php`
+### 3. admin/asset_details.php?id=1
+**Location**: `/admin/asset_details.php`
 **Purpose**: Displays detailed information about a specific asset
 **Features**:
 - Retrieves asset information from database using ID parameter
@@ -40,7 +40,7 @@ This document summarizes the files created to address the issue: "There are some
 - Provides navigation to edit asset or return to list
 - Handles cases where asset ID is not found
 
-**URL Example**: `asset_details.php?id=1`
+**URL Example**: `admin/asset_details.php?id=1`
 
 ## Additional Supporting Files Created:
 
@@ -78,8 +78,8 @@ Database schema with sample data
 
 All PHP files passed syntax validation:
 - ✅ admin/employee_details.php - No syntax errors
-- ✅ edit_employee.php - No syntax errors
-- ✅ asset_details.php - No syntax errors
+- ✅ admin/edit_employee.php - No syntax errors
+- ✅ admin/asset_details.php - No syntax errors
 - ✅ config/db.php - No syntax errors
 - ✅ includes/header.php - No syntax errors
 - ✅ includes/footer.php - No syntax errors
@@ -105,7 +105,9 @@ All files implement security best practices:
 ```
 assets-management-system/
 ├── admin/
-│   └── employee_details.php    ✅ CREATED
+│   ├── employee_details.php    ✅ CREATED
+│   ├── edit_employee.php       ✅ CREATED
+│   └── asset_details.php       ✅ CREATED
 ├── config/
 │   └── db.php                  ✅ CREATED
 ├── database/
@@ -113,8 +115,6 @@ assets-management-system/
 ├── includes/
 │   ├── header.php              ✅ CREATED
 │   └── footer.php              ✅ CREATED
-├── asset_details.php           ✅ CREATED
-├── edit_employee.php           ✅ CREATED
 ├── index.php                   ✅ CREATED
 └── README.md                   ✅ UPDATED
 ```
